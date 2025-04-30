@@ -26,10 +26,10 @@ urlpatterns = [
     path('', api_home),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', include('employees_app.urls')),
+    path('', include('api.urls')),
     
-    path('employees_app/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('employees_app/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 ]
 
 

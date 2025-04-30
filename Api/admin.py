@@ -39,11 +39,11 @@ class EmployeeAdmin(admin.ModelAdmin):
 # Customizing the Project admin interface
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('projectname', 'employee', 'status', 'startdate', 'enddate')
+    list_display = ('name', 'employee', 'status', 'startdate', 'enddate')
     list_filter = ('status',)
-    search_fields = ('projectname', 'employee__name')
+    search_fields = ('name', 'employee__name')
     
     fieldsets = [
-        ("Project Details", {"fields": ["projectname", "employee", "status"]}),
+        ("Project Details", {"fields": ["name", "employee", "status"]}),
         ("Schedule", {"fields": ["startdate", "enddate"]}),
     ]
