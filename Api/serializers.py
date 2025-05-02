@@ -4,6 +4,7 @@ from .models import User
 from .models import Employee, Project
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +17,14 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         user = User.objects.create(**validated_data)
-        
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['username'] = user.username
+        return token  
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
