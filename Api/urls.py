@@ -8,7 +8,7 @@ router.register('projects', ProjectViewSet)
 
 
 urlpatterns = [
-    path('employees_app/', include(router.urls)),
-    path('employees_app/register/', RegisterView.as_view(), name='register'),
-    path('employees_app/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/', include(router.urls)),
+    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]

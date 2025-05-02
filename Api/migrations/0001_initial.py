@@ -62,11 +62,11 @@ class Migration(migrations.Migration):
             name='Project',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('projectname', models.CharField(max_length=100)),
+                ('name', models.CharField(max_length=100)),
                 ('status', models.CharField(max_length=50)),
                 ('startdate', models.DateField()),
                 ('enddate', models.DateField()),
-                ('employee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='projects', to='employees_app.employee')),
+                ('employee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='projects', to='api.employee')),
             ],
         ),
     ]
