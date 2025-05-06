@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 from .models import Employee, Project, User
-from .serializers import EmployeeSerializer, ProjectSerializer, RegisterSerializer
+from .serializers import EmployeeSerializer, ProjectSerializer, RegisterSerializer, CustomTokenObtainPairSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend 
 from rest_framework import generics
 
 
@@ -15,11 +15,7 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['username'] = user.username
-        return token
+    serializer_class = CustomTokenObtainPairSerializer
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -36,4 +32,4 @@ class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['projectname']
+    filterset_fields = ['name']
