@@ -2,16 +2,17 @@ version: '3.9'
 
 services:
   db:
-    image: mysql:8.0
-    container_name: mysql_container
+    image: postgres:16
+    container_name: postgres_container
     restart: always
     env_file:
       - .env
     ports:
-      - "3607:3306"
+      - "5433:5432" 
     networks:
       - employee_network
-    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     image: python:3.12.10
@@ -33,9 +34,9 @@ services:
     networks:
       - employee_network
 
-
 networks:
   employee_network:
     driver: bridge
 
-
+volumes:
+  postgres_data:
